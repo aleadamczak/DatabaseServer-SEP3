@@ -11,11 +11,11 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly IUserDao userLogic;
+    private readonly IUserDao userDao;
 
-    public UsersController(IUserDao userLogic)
+    public UsersController(IUserDao userDao)
     {
-        this.userLogic = userLogic;
+        this.userDao = userDao;
     }
 
     [HttpPost]
@@ -23,7 +23,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            User newUser = await userLogic.CreateAsync(user);
+            User newUser = await userDao.CreateAsync(user);
             return Created($"/users/{user.Id}", newUser);
         }
         catch (Exception e)
@@ -34,13 +34,13 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<User>>> GetAsync([FromQuery] string? username)
+    [Route("{username}")]
+    public async Task<ActionResult<User>> GetByUsernameAsync(string username)
     {
         try
         {
-            SearchUserParametersDto parameters = new(username);
-            IEnumerable<User> users = await userLogic.GetAsync(parameters);
-            return Ok(users);
+            User? user = await userDao.GetByUsernameAsync(username);
+            return Ok(user);
         }
         catch (Exception e)
         {
