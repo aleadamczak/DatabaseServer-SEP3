@@ -7,16 +7,11 @@ public class User
 {
     [Key]
     public int Id { get; set; }
-
-    public string Email { get; set; }
-    
+    // public string? Email { get; set; }
+    [Required]
     public string Password { get; set; }
+    [Required]
     public string UserName { get; set; }
-    
-    
-    
-    
-    
-    // [JsonIgnore]
-    // public ICollection<Todo> Todos { get; set; }
+    public string Name { get; set; }
+    public bool isAdmin { get; set; }
 }
