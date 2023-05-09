@@ -1,7 +1,7 @@
 
 using EfcDataAccess;
 using EfcDataAccess.DaoInterfaces;
-
+using EfcDataAccess.DAOs;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 // builder.Services.AddScoped<FileContext>();
 builder.Services.AddScoped<IUserDao, UserEfcDao>();
 builder.Services.AddScoped<IFileDao, FileEfcDao>();
+builder.Services.AddScoped<ICategoryDao, CategoryEfcDao>();
 
 
 // builder.Services.AddScoped<ITodoDao, TodoEfcDao>();
