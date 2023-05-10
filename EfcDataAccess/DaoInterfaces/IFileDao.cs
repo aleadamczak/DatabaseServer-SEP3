@@ -8,6 +8,8 @@ public interface IFileDao
     
 
     Task<File> GetAsync(int fileId);
+    
+    Task<List<File>> GetAllFilesAsync();
 
 
 }

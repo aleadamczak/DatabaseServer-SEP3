@@ -36,6 +36,12 @@ public class FileEfcDao : IFileDao
         return getFile;
 
     }
+    
+    public async Task<List<File>> GetAllFilesAsync()
+    {
+        return await context.Files.ToListAsync();
+    }  
+
 
     
 }

@@ -57,5 +57,22 @@ public class FileController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpGet]
+    [Route("getAllFiles")]
+    public async Task<ActionResult<IEnumerable<File>>> GetAllFilesAsync()
+    {
+        Console.WriteLine("Files received from .net server");
+        try
+        {
+            IEnumerable<File> files = await fileDao.GetAllFilesAsync();
+            return Ok(files.ToList());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 
 }
