@@ -2,6 +2,7 @@
 using EfcDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfcDataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230505150127_trial")]
+    partial class trial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -38,12 +41,12 @@ namespace EfcDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<int>("uploadedBy")
+                    b.Property<int>("uploadedById")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("uploadedBy");
+                    b.HasIndex("uploadedById");
 
                     b.ToTable("Files");
                 });
@@ -78,7 +81,7 @@ namespace EfcDataAccess.Migrations
                 {
                     b.HasOne("Domain.Models.User", "UploadedBy")
                         .WithMany("Files")
-                        .HasForeignKey("uploadedBy")
+                        .HasForeignKey("uploadedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

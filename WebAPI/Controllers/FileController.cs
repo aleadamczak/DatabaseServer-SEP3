@@ -28,8 +28,9 @@ public class FileController : ControllerBase
             Console.WriteLine(file.Title);
             Console.WriteLine(file.Description);
             Console.WriteLine(file.Category);
+            Console.WriteLine(file.UploadedBy.Id);
             File newFile = await fileDao.CreateAsync(file);
-            return Created($"/users/{file.Id}", newFile);
+            return Created($"/file/{file.Id}", newFile);
         }
         catch (Exception e)
         {
