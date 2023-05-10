@@ -4,5 +4,7 @@ public interface IFileDao
 {
     
     Task<File> CreateAsync(File user);
-    
+
+    Task<File> GetAsync(int fileId);
+
 }

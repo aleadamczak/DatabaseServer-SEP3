@@ -38,4 +38,23 @@ public class FileController : ControllerBase
         }
     }
 
+    [HttpGet]
+    [Route("downloadFile")]
+    public async Task<ActionResult<File>> GetAsync([FromQuery] int fileId)
+    {
+        try
+        {
+            File getFile = await fileDao.GetAsync(fileId);
+            Console.WriteLine("The send file: " + getFile.Title + " " + getFile.Description);
+
+            return getFile;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
 }
