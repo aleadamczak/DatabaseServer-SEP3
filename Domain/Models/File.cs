@@ -15,11 +15,22 @@ public class File
     public string Description { get; set; }
     
     public string Category { get; set; }
-    [AllowNull]
-    public User? uploadedBy { get; set; }
+    [ForeignKey("uploadedBy")]
+    public User UploadedBy { get;  set; }
     // [NotMapped][JsonIgnore]
     // public IBrowserFile? file { get; set; }
     public byte[] bytes{ get; set; }
+
+
+    public File(User uploadedBy, string description)
+    {
+        this.UploadedBy = uploadedBy;
+        Description = description;
+    }
+
+    private File()
+    {
+    }
 
 
     // public byte[] GetBytesFromIBrowserFile(IBrowserFile file)

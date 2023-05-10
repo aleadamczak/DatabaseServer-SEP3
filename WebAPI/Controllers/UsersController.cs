@@ -35,7 +35,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Route("{username}")]
-    public async Task<ActionResult<User>> GetByUsernameAsync(string username)
+    public async Task<ActionResult<User?>> GetByUsernameAsync(string username)
     {
         try
         {

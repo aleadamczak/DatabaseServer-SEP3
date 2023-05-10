@@ -11,7 +11,9 @@ public class User
     [Required]
     public string Password { get; set; }
     [Required]
-    public string UserName { get; set; }
+    public string Username { get; set; }
     public string Name { get; set; }
     public bool isAdmin { get; set; }
+    // [JsonIgnore]
+    // public ICollection<File> Files { get; set; }
 }

@@ -28,8 +28,9 @@ public class UserEfcDao: IUserDao
     public async Task<User?> GetByUsernameAsync(string userName)
     {
         User? existing = await context.Users.FirstOrDefaultAsync(u =>
-            u.UserName.Equals(userName)
+            u.Username.Equals(userName)
         );
+        Console.WriteLine(userName);
         return existing;
     }
 
@@ -38,7 +39,7 @@ public class UserEfcDao: IUserDao
         IQueryable<User> usersQuery = context.Users.AsQueryable();
         if (searchParameters.UsernameContains != null)
         {
-            usersQuery = usersQuery.Where(u => u.UserName.Contains(searchParameters.UsernameContains));
+            usersQuery = usersQuery.Where(u => u.Username.Contains(searchParameters.UsernameContains));
         }
 
         IEnumerable<User> result = await usersQuery.ToListAsync();

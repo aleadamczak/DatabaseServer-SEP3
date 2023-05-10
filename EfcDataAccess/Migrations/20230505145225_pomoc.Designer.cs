@@ -2,6 +2,7 @@
 using EfcDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,25 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfcDataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230505145225_pomoc")]
+    partial class pomoc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
-
-            modelBuilder.Entity("Domain.Models.Category", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Name");
-
-                    b.ToTable("Categories");
-                });
 
             modelBuilder.Entity("Domain.Models.File", b =>
                 {
@@ -51,12 +41,12 @@ namespace EfcDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<int>("uploadedBy")
+                    b.Property<int>("uploadedById")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("uploadedBy");
+                    b.HasIndex("uploadedById");
 
                     b.ToTable("Files");
                 });
@@ -90,17 +80,12 @@ namespace EfcDataAccess.Migrations
             modelBuilder.Entity("Domain.Models.File", b =>
                 {
                     b.HasOne("Domain.Models.User", "UploadedBy")
-                        .WithMany("Files")
-                        .HasForeignKey("uploadedBy")
+                        .WithMany()
+                        .HasForeignKey("uploadedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("UploadedBy");
-                });
-
-            modelBuilder.Entity("Domain.Models.User", b =>
-                {
-                    b.Navigation("Files");
                 });
 #pragma warning restore 612, 618
         }

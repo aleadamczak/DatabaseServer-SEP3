@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using System.Security.Cryptography.X509Certificates;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using File = Domain.Models.File;
 
@@ -20,7 +21,9 @@ public class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.Entity<User>().HasKey(user => user.Id);
-        // modelBuilder.Entity<PublicFile>().HasKey(publicFile => publicFile.Id);
+        modelBuilder.Entity<User>().HasKey(user => user.Id);
+        modelBuilder.Entity<File>()
+            .HasKey(publicFile => publicFile.Id);
+
     }
 }
