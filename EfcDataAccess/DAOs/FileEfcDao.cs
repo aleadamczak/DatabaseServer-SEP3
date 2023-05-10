@@ -29,5 +29,13 @@ public class FileEfcDao : IFileDao
         return newFile.Entity;
     }
 
+    public async Task<File> GetAsync(int fileId)
+    {
+
+        File getFile = await context.Files.FindAsync(fileId);
+        return getFile;
+
+    }
+
     
 }
