@@ -33,11 +33,11 @@ public class File
     {
     }
     
-    public File(string title, string description, string category, User uploadedBy, byte[] bytes)
+    public File(string title, string description, Category category, User uploadedBy, byte[] bytes)
     {
         Title = title;
-        Description = description;
-        Category = new Category {Name = category};
+        Description = description; 
+        Category = category;
         UploadedBy = uploadedBy;
         this.bytes = bytes;
     }
