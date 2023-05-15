@@ -1,4 +1,5 @@
 ﻿using EfcDataAccess.DaoInterfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Category = Domain.Models.Category;
 
@@ -21,5 +22,10 @@ public class CategoryEfcDao : ICategoryDao
         await context.SaveChangesAsync();
         return newcategory.Entity;
     }
-    
+
+    public async Task<IEnumerable<Category>> GetAllAsync()
+    {
+        return await context.Categories.ToListAsync();
+    }
+
 }

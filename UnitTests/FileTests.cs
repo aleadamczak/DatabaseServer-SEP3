@@ -9,6 +9,7 @@ public class FileTests
 {
     private DataContext context;
     private FileEfcDao fileEfcDao;
+
     [SetUp]
     public void Setup()
     {
@@ -35,7 +36,6 @@ public class FileTests
            context.Categories.Remove(category);
        }
        context.SaveChanges();
-       
     }
 
     [Test]
@@ -49,10 +49,11 @@ public class FileTests
     [Test]
     public async Task OneCreateAsyncTest()
     {
+
         var user = new User { Id = 1, Name = "John Doe" , Username = "Johny", Password = "whatever", isAdmin = false};
         var category = new Category { Id = 1, Name = "TestCategory" };
         var file = new File("TestTitle", "TestDescription", category, user, Array.Empty<byte>());
-        
+
         var result = await fileEfcDao.CreateAsync(file);
 
         // Assert
@@ -68,7 +69,7 @@ public class FileTests
         Assert.AreEqual(user.Username, result.UploadedBy.Username);
         Assert.AreEqual(user.Password, result.UploadedBy.Password);
         Assert.AreEqual(user.isAdmin, result.UploadedBy.isAdmin);
-        
+
         Assert.AreEqual(file.UploadedBy, result.UploadedBy);
     }
 
@@ -86,7 +87,6 @@ public class FileTests
         Assert.AreEqual("TestTitle", result.Title);
         Assert.AreEqual("TestDescription", result.Description);
         Assert.AreEqual("TestCategory", result.Category.Name);
-        
         Assert.AreEqual(result.GetType(), typeof(GetAllFilesDto));
     }
 
@@ -96,13 +96,11 @@ public class FileTests
         OneCreateAsyncTest();
 
         var result = await fileEfcDao.GetAsync(1);
-        
+
         Assert.AreEqual(1, result.Id);
         Assert.AreEqual("TestTitle", result.Title);
         Assert.AreEqual("TestDescription", result.Description);
         Assert.AreEqual("TestCategory", result.Category.Name);
         Assert.AreEqual(Array.Empty<byte>(), result.bytes);
     }
-
-
 }
