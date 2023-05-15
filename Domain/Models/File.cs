@@ -13,8 +13,7 @@ public class File
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    
-    public string Category { get; set; }
+    public Category Category { get; set; }
     [ForeignKey("uploadedBy")]
     public User UploadedBy { get;  set; }
     // [NotMapped][JsonIgnore]
@@ -22,13 +21,14 @@ public class File
     public byte[] bytes{ get; set; }
 
 
-    public File(User uploadedBy, string description)
-    {
-        this.UploadedBy = uploadedBy;
-        Description = description;
-    }
+    // public File(User uploadedBy, string description)
+    // {
+    //     this.UploadedBy = uploadedBy;
+    //     Description = description;
+    // }
+    
 
-    private File()
+    public File()
     {
     }
 
