@@ -19,6 +19,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
+    [Route("createUser")]
     public async Task<ActionResult<User>> CreateAsync(User user)
     {
         try

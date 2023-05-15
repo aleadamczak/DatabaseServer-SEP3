@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using Domain.DTOs;
+using Domain.Models;
 using EfcDataAccess;
 using EfcDataAccess.DaoInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +41,15 @@ public class FileEfcDao : IFileDao
     public async Task<List<File>> GetAllFilesAsync()
     {
         return await context.Files.ToListAsync();
-    }  
+    }
+
+    public async Task<List<GetAllFilesDto>> GetAllFileDtosAsync()
+    {
+        return await context.Files
+            .Select(f => new GetAllFilesDto (
+                f.Id, f.Title, f.Description, f.Category, f. UploadedBy))
+            .ToListAsync();
+    }
 
 
     

@@ -8,7 +8,8 @@ namespace Domain.Models;
 
 public class File
 {
-    
+
+
     [Key]
     public int Id { get; set; }
     public string Title { get; set; }
@@ -31,7 +32,16 @@ public class File
     private File()
     {
     }
-
+    
+    public File(string title, string description, string category, User uploadedBy, byte[] bytes)
+    {
+        Title = title;
+        Description = description;
+        Category = category;
+        UploadedBy = uploadedBy;
+        this.bytes = bytes;
+    }
+    
 
     // public byte[] GetBytesFromIBrowserFile(IBrowserFile file)
     // {
