@@ -40,5 +40,23 @@ public class CategoryController : ControllerBase
         }
     }
 
+    [HttpGet]
+    [Route("getCategories")]
+
+    public async Task<ActionResult<IEnumerable<Category>>> GetAllAsync()
+    {
+        Console.WriteLine("Categories received from .net server");
+        try
+        {
+            IEnumerable<Category> categories = await _categoryDao.GetAllAsync();
+            return Ok(categories);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
 
 }
