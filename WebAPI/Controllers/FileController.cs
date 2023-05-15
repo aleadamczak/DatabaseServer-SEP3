@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
 using EfcDataAccess.DaoInterfaces;
 using File = Domain.Models.File;
@@ -19,18 +20,26 @@ public class FileController : ControllerBase
 
     [HttpPost]
     [Route ("uploadFile")]
-    public async Task<ActionResult<File>> CreateAsync(File file)
+    public async Task<ActionResult<File>> CreateAsync(FileCreationDto dto)
     {
         Console.WriteLine("File received on the .net server");
         try
         {
            
-            Console.WriteLine(file.Title);
-            Console.WriteLine(file.Description);
-            Console.WriteLine(file.Category);
-            Console.WriteLine(file.UploadedBy.Id);
-            File newFile = await fileDao.CreateAsync(file);
-            return Created($"/file/{file.Id}", newFile);
+            Console.WriteLine(dto.Title);
+            Console.WriteLine(dto.Description);
+            Console.WriteLine(dto.Category);
+            Console.WriteLine(dto.UploadedBy.Id);
+            var tobeStored = new File()
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                Category = dto.Category,
+                UploadedBy = dto.UploadedBy,
+                bytes = dto.bytes
+            };
+            File newFile = await fileDao.CreateAsync(tobeStored);
+            return Created($"/file/{newFile.Id}", newFile);
         }
         catch (Exception e)
         {
