@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
 using EfcDataAccess.DaoInterfaces;
 using File = Domain.Models.File;

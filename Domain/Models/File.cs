@@ -15,7 +15,7 @@ public class File
     public string Title { get; set; }
     public string Description { get; set; }
     
-    public string Category { get; set; }
+    public Category Category { get; set; }
     [ForeignKey("uploadedBy")]
     public User UploadedBy { get;  set; }
     // [NotMapped][JsonIgnore]
@@ -37,7 +37,7 @@ public class File
     {
         Title = title;
         Description = description;
-        Category = category;
+        Category = new Category {Name = category};
         UploadedBy = uploadedBy;
         this.bytes = bytes;
     }

@@ -7,10 +7,10 @@ public class GetAllFilesDto
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public string Category { get; set; }
+    public Category Category { get; set; }
     public User UploadedBy { get;  set; }
     
-    public GetAllFilesDto(int id, string title, string description, string category, User uploadedBy)
+    public GetAllFilesDto(int id, string title, string description, Category category, User uploadedBy)
     {
         Id = id;
         Title = title;
