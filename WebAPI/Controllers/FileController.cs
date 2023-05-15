@@ -20,26 +20,18 @@ public class FileController : ControllerBase
 
     [HttpPost]
     [Route ("uploadFile")]
-    public async Task<ActionResult<File>> CreateAsync(FileCreationDto dto)
+    public async Task<ActionResult<File>> CreateAsync(File file)
     {
         Console.WriteLine("File received on the .net server");
         try
         {
            
-            Console.WriteLine(dto.Title);
-            Console.WriteLine(dto.Description);
-            Console.WriteLine(dto.Category);
-            Console.WriteLine(dto.UploadedBy.Id);
-            var tobeStored = new File()
-            {
-                Title = dto.Title,
-                Description = dto.Description,
-                Category = dto.Category,
-                UploadedBy = dto.UploadedBy,
-                bytes = dto.bytes
-            };
-            File newFile = await fileDao.CreateAsync(tobeStored);
-            return Created($"/file/{newFile.Id}", newFile);
+            Console.WriteLine(file.Title);
+            Console.WriteLine(file.Description);
+            Console.WriteLine(file.Category);
+            Console.WriteLine(file.UploadedBy.Id);
+            File newFile = await fileDao.CreateAsync(file);
+            return Created($"/file/{file.Id}", newFile);
         }
         catch (Exception e)
         {
@@ -75,6 +67,23 @@ public class FileController : ControllerBase
         try
         {
             IEnumerable<File> files = await fileDao.GetAllFilesAsync();
+            return Ok(files.ToList());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet]
+    [Route("getAllFileDtos")]
+    public async Task<ActionResult<IEnumerable<GetAllFilesDto>>> GetAllFileDtosAsync()
+    {
+        Console.WriteLine("File DTOs received from .net server");
+        try
+        {
+            IEnumerable<GetAllFilesDto> files = await fileDao.GetAllFileDtosAsync();
             return Ok(files.ToList());
         }
         catch (Exception e)

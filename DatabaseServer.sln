@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfcDataAccess", "EfcDataAccess\EfcDataAccess.csproj", "{4F10076E-FF97-41EA-A131-30969F687A71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{A7591DF5-02AB-43B6-8747-BD741EA7780C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{4F10076E-FF97-41EA-A131-30969F687A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F10076E-FF97-41EA-A131-30969F687A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F10076E-FF97-41EA-A131-30969F687A71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7591DF5-02AB-43B6-8747-BD741EA7780C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7591DF5-02AB-43B6-8747-BD741EA7780C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7591DF5-02AB-43B6-8747-BD741EA7780C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7591DF5-02AB-43B6-8747-BD741EA7780C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

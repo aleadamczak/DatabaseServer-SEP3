@@ -1,4 +1,6 @@
-﻿namespace EfcDataAccess.DaoInterfaces;
+﻿using Domain.DTOs;
+
+namespace EfcDataAccess.DaoInterfaces;
 using Domain.Models;
 public interface IFileDao
 {
@@ -11,5 +13,5 @@ public interface IFileDao
     
     Task<List<File>> GetAllFilesAsync();
 
-
+    Task<List<GetAllFilesDto>> GetAllFileDtosAsync();
 }

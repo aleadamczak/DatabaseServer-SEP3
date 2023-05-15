@@ -8,11 +8,13 @@ namespace Domain.Models;
 
 public class File
 {
-    
+
+
     [Key]
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
+    
     public Category Category { get; set; }
     [ForeignKey("uploadedBy")]
     public User UploadedBy { get;  set; }
@@ -21,17 +23,25 @@ public class File
     public byte[] bytes{ get; set; }
 
 
-    // public File(User uploadedBy, string description)
-    // {
-    //     this.UploadedBy = uploadedBy;
-    //     Description = description;
-    // }
-    
-
-    public File()
+    public File(User uploadedBy, string description)
     {
+        this.UploadedBy = uploadedBy;
+        Description = description;
     }
 
+    private File()
+    {
+    }
+    
+    public File(string title, string description, Category category, User uploadedBy, byte[] bytes)
+    {
+        Title = title;
+        Description = description; 
+        Category = category;
+        UploadedBy = uploadedBy;
+        this.bytes = bytes;
+    }
+    
 
     // public byte[] GetBytesFromIBrowserFile(IBrowserFile file)
     // {
