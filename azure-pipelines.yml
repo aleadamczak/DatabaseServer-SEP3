@@ -38,5 +38,5 @@ steps:
   name: 'RunUnitTests'
   inputs:
     command: 'test'
-    projects: '**/UnitTests/FileTests.cs'
+    projects: '**/UnitTests.csproj'
     configuration: '$(buildConfiguration)'
