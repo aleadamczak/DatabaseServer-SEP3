@@ -76,7 +76,7 @@ public class FileTests
         Assert.AreEqual(1, result.Id);
         Assert.AreEqual("TestTitle", result.Title);
         Assert.AreEqual("TestDescription", result.Description);
-        Assert.AreEqual("TestCategory", result.Category);
+        Assert.AreEqual("TestCategory", result.Category.Name);
         
         Assert.AreEqual(result.GetType(), typeof(GetAllFilesDto));
     }
@@ -91,7 +91,7 @@ public class FileTests
         Assert.AreEqual(1, result.Id);
         Assert.AreEqual("TestTitle", result.Title);
         Assert.AreEqual("TestDescription", result.Description);
-        Assert.AreEqual("TestCategory", result.Category);
+        Assert.AreEqual("TestCategory", result.Category.Name);
         Assert.AreEqual(Array.Empty<byte>(), result.bytes);
     }
 
