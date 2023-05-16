@@ -30,6 +30,7 @@ public class FileController : ControllerBase
             Console.WriteLine(file.Description);
             Console.WriteLine(file.Category);
             Console.WriteLine(file.UploadedBy.Id);
+            Console.WriteLine(file.ContentType);
             File newFile = await fileDao.CreateAsync(file);
             return Created($"/file/{file.Id}", newFile);
         }

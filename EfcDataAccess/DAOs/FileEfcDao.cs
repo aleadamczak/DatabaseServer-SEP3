@@ -25,6 +25,8 @@ public class FileEfcDao : IFileDao
         Console.WriteLine(file.UploadedBy.Id);
         User? existing = await context.Users.FindAsync(file.UploadedBy.Id);
         if (existing != null) file.UploadedBy = existing;
+        Category? existingC = await context.Categories.FindAsync(file.Category.Name);
+        if (existingC != null) file.Category = existingC;
         EntityEntry<File> newFile = await context.Files.AddAsync(file);
         await context.SaveChangesAsync();
         return newFile.Entity;
