@@ -24,7 +24,8 @@ public class DataContext : DbContext
         modelBuilder.Entity<User>().HasKey(user => user.Id);
         modelBuilder.Entity<File>()
             .HasKey(publicFile => publicFile.Id);
-        modelBuilder.Entity<Category>().HasKey(category => category.Id);
+        modelBuilder.Entity<File>()
+            .HasOne(c => c.Category);
 
     }
 }

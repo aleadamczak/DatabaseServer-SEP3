@@ -7,5 +7,5 @@ public interface ICategoryDao
 {
     Task<Category> CreateAsync(Category category);
 
-    Task<IEnumerable<Category>> GetAllAsync();
+    Task<List<Category>> GetAllAsync();
 }

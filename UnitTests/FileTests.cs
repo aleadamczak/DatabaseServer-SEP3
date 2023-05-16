@@ -52,7 +52,7 @@ public class FileTests
 
         var user = new User { Id = 1, Name = "John Doe" , Username = "Johny", Password = "whatever", isAdmin = false};
         var category = new Category { Id = 1, Name = "TestCategory" };
-        var file = new File("TestTitle", "TestDescription", category, user, Array.Empty<byte>());
+        var file = new File("TestTitle", "TestDescription", category, user, Array.Empty<byte>(), "TestContentType");
 
         var result = await fileEfcDao.CreateAsync(file);
 
