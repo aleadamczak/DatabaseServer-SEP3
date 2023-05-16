@@ -8,14 +8,14 @@ namespace Domain.Models;
 
 public class File
 {
-    
+
+
     [Key]
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    
     public Category Category { get; set; }
-    [ForeignKey("uploadedBy")]
+    public string ContentType { get; set; }
     public User UploadedBy { get;  set; }
     // [NotMapped][JsonIgnore]
     // public IBrowserFile? file { get; set; }
@@ -28,10 +28,20 @@ public class File
         Description = description;
     }
 
-    private File()
+    public File()
     {
     }
-
+    
+    public File(string title, string description, Category category, User uploadedBy, byte[] bytes, string contentType)
+    {
+        Title = title;
+        Description = description; 
+        Category = category;
+        UploadedBy = uploadedBy;
+        this.bytes = bytes;
+        ContentType = contentType;
+    }
+    
 
     // public byte[] GetBytesFromIBrowserFile(IBrowserFile file)
     // {

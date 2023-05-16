@@ -27,6 +27,8 @@ public class FileEfcDao : IFileDao
         Console.WriteLine(file.UploadedBy.Id);
         User? existing = await context.Users.FindAsync(file.UploadedBy.Id);
         if (existing != null) file.UploadedBy = existing;
+        Category? existingC = await context.Categories.FindAsync(file.Category.Name);
+        if (existingC != null) file.Category = existingC;
         EntityEntry<File> newFile = await context.Files.AddAsync(file);
         await context.SaveChangesAsync();
         return newFile.Entity;
@@ -53,7 +55,15 @@ public class FileEfcDao : IFileDao
     public async Task<List<File>> GetAllFilesAsync()
     {
         return await context.Files.ToListAsync();
-    }  
+    }
+
+    public async Task<List<GetAllFilesDto>> GetAllFileDtosAsync()
+    {
+        return await context.Files
+            .Select(f => new GetAllFilesDto (
+                f.Id, f.Title, f.Description, f.Category, f. UploadedBy))
+            .ToListAsync();
+    }
 
 
     

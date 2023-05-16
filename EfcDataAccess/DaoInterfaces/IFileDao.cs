@@ -13,5 +13,5 @@ public interface IFileDao
     
     Task<List<File>> GetAllFilesAsync();
 
-
+    Task<List<GetAllFilesDto>> GetAllFileDtosAsync();
 }

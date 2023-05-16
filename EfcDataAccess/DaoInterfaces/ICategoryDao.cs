@@ -6,4 +6,6 @@ namespace EfcDataAccess.DaoInterfaces;
 public interface ICategoryDao
 {
     Task<Category> CreateAsync(Category category);
+
+    Task<List<Category>> GetAllAsync();
 }

@@ -30,6 +30,7 @@ public class FileController : ControllerBase
             Console.WriteLine(file.Description);
             Console.WriteLine(file.Category);
             Console.WriteLine(file.UploadedBy.Id);
+            Console.WriteLine(file.ContentType);
             File newFile = await fileDao.CreateAsync(file);
             return Created($"/file/{file.Id}", newFile);
         }
@@ -67,6 +68,23 @@ public class FileController : ControllerBase
         try
         {
             IEnumerable<File> files = await fileDao.GetAllFilesAsync();
+            return Ok(files.ToList());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet]
+    [Route("getAllFileDtos")]
+    public async Task<ActionResult<IEnumerable<GetAllFilesDto>>> GetAllFileDtosAsync()
+    {
+        Console.WriteLine("File DTOs received from .net server");
+        try
+        {
+            IEnumerable<GetAllFilesDto> files = await fileDao.GetAllFileDtosAsync();
             return Ok(files.ToList());
         }
         catch (Exception e)

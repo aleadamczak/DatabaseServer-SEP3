@@ -12,17 +12,16 @@ namespace WebAPI.Controllers;
 
 public class CategoryController : ControllerBase
 {
+    
     private ICategoryDao _categoryDao;
-
     public CategoryController(ICategoryDao categoryDao)
     {
         _categoryDao = categoryDao;
     }
-
-
+    
+    
     [HttpPost]
     [Route("uploadCategory")]
-
     public async Task<ActionResult<Category>> CreateAsync(Category category)
     {
         Console.WriteLine("Category received on the .net server");
@@ -32,6 +31,23 @@ public class CategoryController : ControllerBase
             Category categoryx = await _categoryDao.CreateAsync(category);
             return Created($"/category/{categoryx.Id}", categoryx);
 
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("getCategories")]
+    public async Task<ActionResult<List<Category>>> GetAllAsync()
+    {
+        Console.WriteLine("Categories received from .net server");
+        try
+        {
+            List<Category> categories = await _categoryDao.GetAllAsync();
+            return Ok(categories);
         }
         catch (Exception e)
         {
