@@ -2,6 +2,8 @@
 using Domain.Models;
 using EfcDataAccess;
 using EfcDataAccess.DaoInterfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using File = Domain.Models.File;
@@ -32,11 +34,21 @@ public class FileEfcDao : IFileDao
         return newFile.Entity;
     }
 
-    public async Task<File> GetAsync(int fileId)
+    public async Task<FileDownloadDto> GetAsync(int fileId)
     {
+        try
+        {
+            File getFile = await context.Files.FindAsync(fileId);
 
-        File getFile = await context.Files.FindAsync(fileId);
-        return getFile;
+            FileDownloadDto downloadFile = new FileDownloadDto(getFile.Title, getFile.bytes);
+            return downloadFile;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);
+        }
 
     }
     
