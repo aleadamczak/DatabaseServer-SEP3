@@ -49,7 +49,7 @@ public class FileEfcDao : IFileDao
     {
         return await context.Files
             .Select(f => new GetAllFilesDto (
-                f.Id, f.Title, f.Description, f.Category, f. UploadedBy))
+                f.Id, f.Title, f.Description, f.Category, f.ContentType,f. UploadedBy))
             .ToListAsync();
     }
 
