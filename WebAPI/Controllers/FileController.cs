@@ -43,14 +43,14 @@ public class FileController : ControllerBase
 
     [HttpGet]
     [Route("downloadFile")]
-    public async Task<ActionResult<File>> GetAsync([FromQuery] int fileId)
+    public async Task<ActionResult<FileDownloadDto>> GetAsync([FromQuery] int fileId)
     {
         try
         {
-            File getFile = await fileDao.GetAsync(fileId);
-            Console.WriteLine("The send file: " + getFile.Title + " " + getFile.Description);
+            FileDownloadDto downloadFile = await fileDao.GetAsync(fileId);
+            Console.WriteLine("The send file: " + downloadFile.Title);
 
-            return getFile;
+            return downloadFile;
 
         }
         catch (Exception e)
