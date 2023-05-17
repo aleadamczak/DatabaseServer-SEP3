@@ -1,4 +1,5 @@
-﻿using Domain.DTOs;
+﻿using System.Net;
+using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
 using EfcDataAccess.DaoInterfaces;
@@ -92,6 +93,23 @@ public class FileController : ControllerBase
             Console.WriteLine(e);
             return StatusCode(500, e.Message);
         }
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<ActionResult<File?>> Delete(int id)
+    {
+        try
+        {
+            File? toBeDeleted = await fileDao.Delete(id);
+            return Ok(toBeDeleted);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+        
     }
 
 }
