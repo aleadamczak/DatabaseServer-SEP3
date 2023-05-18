@@ -28,22 +28,23 @@ public class CategoryEfcDao : ICategoryDao
        
         return await context.Categories.ToListAsync();
     }
-
-    public async Task<Category> DeleteAsync(Category category)
-
+    
+    public async Task<Category> DeleteAsync(Category category) 
     {
-        
+        Category existing = await context.Categories.FindAsync(category.Name);
+        Category toBeDeleted = null;
 
-        
-        
-        Category? newcategory =  context.Categories.FindAsync(category.Name).Result;
-        Category? toBeDeleted = null;
-        if (newcategory != null)
+        if (existing != null)
         {
-            toBeDeleted = context.Categories.Remove(newcategory).Entity;
+            toBeDeleted = context.Categories.Remove(existing).Entity;
             await context.SaveChangesAsync();
         }
+
         return toBeDeleted;
+
     }
+    
+
+
 
 }
