@@ -14,4 +14,6 @@ public interface IFileDao
     Task<List<File>> GetAllFilesAsync();
 
     Task<List<GetAllFilesDto>> GetAllFileDtosAsync();
+
+    Task<File?> Delete(int id);
 }

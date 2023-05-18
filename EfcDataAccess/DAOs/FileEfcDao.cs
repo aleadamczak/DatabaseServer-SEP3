@@ -64,8 +64,16 @@ public class FileEfcDao : IFileDao
                 f.Id, f.Title, f.Description, f.Category, f.ContentType,f. UploadedBy))
             .ToListAsync();
     }
-    
 
-
-    
+    public async Task<File?> Delete(int id)
+    {
+        File? file = context.Files.FindAsync(id).Result;
+        File? toBeDeleted = null;
+        if (file != null)
+        {
+            toBeDeleted = context.Files.Remove(file).Entity;
+            await context.SaveChangesAsync();
+        }
+        return toBeDeleted;
+    }
 }
