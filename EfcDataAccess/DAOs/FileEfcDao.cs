@@ -40,7 +40,7 @@ public class FileEfcDao : IFileDao
         {
             File getFile = await context.Files.FindAsync(fileId);
 
-            FileDownloadDto downloadFile = new FileDownloadDto(getFile.Title, getFile.bytes);
+            FileDownloadDto downloadFile = new FileDownloadDto(getFile.Title, getFile.bytes, getFile.ContentType);
             return downloadFile;
 
         }
