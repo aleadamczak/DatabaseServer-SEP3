@@ -55,6 +55,24 @@ public class CategoryController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpDelete]
+    [Route("deleteCategory")]
+    public async Task<ActionResult<Category>> DeleteAsync(Category category)
+    {
+        Console.WriteLine("Categories received from .net server");
+        try
+        {
+            Category deletedcategory = await _categoryDao.DeleteAsync(category);
+            return Ok(deletedcategory);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
 
 
 }

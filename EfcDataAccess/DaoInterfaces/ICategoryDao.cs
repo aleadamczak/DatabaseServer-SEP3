@@ -8,4 +8,5 @@ public interface ICategoryDao
     Task<Category> CreateAsync(Category category);
 
     Task<List<Category>> GetAllAsync();
+    Task<Category> DeleteAsync(Category category);
 }
