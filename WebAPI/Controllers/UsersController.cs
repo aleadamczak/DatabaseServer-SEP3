@@ -49,4 +49,22 @@ public class UsersController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+
+    [HttpGet]
+    [Route("getAll")]
+    public async Task<ActionResult<List<UserDisplayDto>>> GetAllAsync()
+    {
+
+        try
+        {
+            List<UserDisplayDto> result = await userDao.GetAll();
+            return Ok(result);
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 }

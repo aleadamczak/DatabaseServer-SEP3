@@ -9,8 +9,10 @@ public class DataContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<File> Files { get; set; }
-    
     public DbSet<Category> Categories { get; set; }
+    public DbSet<PrivateFile> PrivateFiles { get; set; }
+
+    // public DbSet<PrivateFileUser> PrivateFileUsers { get; set; }
 
     // public DbSet<PublicFile> Files { get; set; }
 
@@ -26,6 +28,8 @@ public class DataContext : DbContext
             .HasKey(publicFile => publicFile.Id);
         modelBuilder.Entity<File>()
             .HasOne(c => c.Category);
-
+        modelBuilder.Entity<PrivateFile>().HasOne(pf => pf.UploadedBy);
+        modelBuilder.Entity<PrivateFile>().HasMany(pf => pf.HaveAccess).WithMany(u =>
+            u.SharedWithMe);
     }
 }

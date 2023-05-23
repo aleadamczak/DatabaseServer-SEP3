@@ -2,6 +2,7 @@
 using EfcDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfcDataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230519111919_privateFileConfig")]
+    partial class privateFileConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -122,13 +125,13 @@ namespace EfcDataAccess.Migrations
 
             modelBuilder.Entity("PrivateFileUser", b =>
                 {
-                    b.Property<int>("HaveAccessId")
+                    b.Property<int>("SharedWithId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SharedWithMeId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("HaveAccessId", "SharedWithMeId");
+                    b.HasKey("SharedWithId", "SharedWithMeId");
 
                     b.HasIndex("SharedWithMeId");
 
@@ -167,7 +170,7 @@ namespace EfcDataAccess.Migrations
                 {
                     b.HasOne("Domain.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("HaveAccessId")
+                        .HasForeignKey("SharedWithId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

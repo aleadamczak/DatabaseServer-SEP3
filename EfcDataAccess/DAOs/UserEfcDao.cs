@@ -51,4 +51,14 @@ public class UserEfcDao: IUserDao
         User? user = await context.Users.FindAsync(id);
         return user;
     }
+
+    public async Task<List<UserDisplayDto>> GetAll()
+    {
+        return await context.Users.Select(u => new UserDisplayDto()
+            {
+                Name = u.Name,
+                Username = u.Username,
+                IsAdmin = u.isAdmin
+            }).ToListAsync();
+    }
 }
