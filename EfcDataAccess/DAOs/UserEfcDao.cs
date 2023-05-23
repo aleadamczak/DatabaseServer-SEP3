@@ -20,8 +20,10 @@ public class UserEfcDao: IUserDao
 
     public async Task<User> CreateAsync(User user)
     {
+        Console.WriteLine("I am here");
         EntityEntry<User> newUser = await context.Users.AddAsync(user);
         await context.SaveChangesAsync();
+        Console.WriteLine(newUser.Entity.Name);
         return newUser.Entity;
     }
 
@@ -50,5 +52,14 @@ public class UserEfcDao: IUserDao
     {
         User? user = await context.Users.FindAsync(id);
         return user;
+    }
+
+    public async Task<User?> LoginAsync(UserLoginDto userLoginDto)
+    {
+        User? existing = await context.Users.FirstOrDefaultAsync(u =>
+            u.Username.Equals(userLoginDto.Username) && u.Password.Equals(userLoginDto.Password)
+        );
+
+        return existing;
     }
 }
