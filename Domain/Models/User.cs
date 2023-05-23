@@ -14,6 +14,9 @@ public class User
     public string Username { get; set; }
     public string Name{ get; set; }
     public bool isAdmin { get; set; }
+
+    [JsonIgnore]
+    public List<PrivateFile>? SharedWithMe { get; set; }
     // [JsonIgnore]
     // public ICollection<File> Files { get; set; }
 }

@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserDao, UserEfcDao>();
 builder.Services.AddScoped<IFileDao, FileEfcDao>();
 builder.Services.AddScoped<ICategoryDao, CategoryEfcDao>();
+builder.Services.AddScoped<IPrivateFileDao, PrivateFileEfcDao>();
 
 
 // builder.Services.AddScoped<ITodoDao, TodoEfcDao>();
