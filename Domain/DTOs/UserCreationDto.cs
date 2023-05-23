@@ -2,15 +2,16 @@
 
 public class UserCreationDto
 {
-    public string UserName { get;}
-    public string Email { get; }
+    public string Username { get;}
+    public string Name { get; }
     public string Password { get; }
-
-    public UserCreationDto(string userName, string email, string password)
+    
+    public bool IsAdmin { get;}
+    public UserCreationDto(string username, string name, string password, bool isAdmin)
     {
-        UserName = userName;
-        Email = email;
+        Username = username;
+        Name = name;
         Password = password;
-
+        IsAdmin = isAdmin;
     }
 }

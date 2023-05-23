@@ -61,4 +61,13 @@ public class UserEfcDao: IUserDao
                 IsAdmin = u.isAdmin
             }).ToListAsync();
     }
+    
+    public async Task<User?> LoginAsync(UserLoginDto userLoginDto)
+    {
+        User? existing = await context.Users.FirstOrDefaultAsync(u =>
+            u.Username.Equals(userLoginDto.Username) && u.Password.Equals(userLoginDto.Password)
+        );
+
+        return existing;
+    }
 }

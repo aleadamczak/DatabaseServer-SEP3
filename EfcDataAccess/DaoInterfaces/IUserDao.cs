@@ -10,4 +10,6 @@ public interface IUserDao
     Task<User?> GetByIdAsync(int id);
 
     Task<List<UserDisplayDto>> GetAll();
+    
+    Task<User?> LoginAsync(UserLoginDto userLoginDto);
 }
