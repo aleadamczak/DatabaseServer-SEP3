@@ -34,5 +34,25 @@ public class PrivateFileController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
+
+    [HttpGet]
+    [Route("getSharedWithMe/{id}")]
+
+    public async Task<ActionResult<List<PrivateFileDisplayDto>>> GetSharedWithAsync(int id)
+    {
+        
+        try
+        {
+            List<PrivateFileDisplayDto> privateFiles = await _privateFileDao.GetSharedWithUser(id);
+            return Ok(privateFiles);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+        
+        
+    }
+
 }
