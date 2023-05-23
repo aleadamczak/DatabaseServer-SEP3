@@ -67,4 +67,21 @@ public class UsersController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpGet]
+    [Route("login/{username}.{password}")]
+    public async Task<ActionResult<User?>> LoginAsync(string username, string password)
+    {
+        try
+        {
+            UserLoginDto userLoginDto = new UserLoginDto(username, password);
+            User? user = await userDao.LoginAsync(userLoginDto);
+            return Ok(user);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 }
