@@ -1,4 +1,5 @@
-﻿using Domain.DTOs;
+﻿using System.Diagnostics;
+using Domain.DTOs;
 using Domain.Models;
 using EfcDataAccess.DaoInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -52,5 +53,27 @@ public class PrivateFileEfcDao : IPrivateFileDao
         //     await context.SaveChangesAsync();
         // }
         return newFile.Entity;
+    }
+
+    public async Task<List<PrivateFileDisplayDto>> GetSharedWithUser(int id)
+    {
+       List<PrivateFile> privateFiles =  await context.Users
+            .Where(u => u.Id == id)
+            .SelectMany(u => u.SharedWithMe)
+            .ToListAsync();
+
+       List<PrivateFileDisplayDto> privateFileDisplayDtos = new List<PrivateFileDisplayDto>();
+       foreach (PrivateFile pf in privateFiles)
+       {
+           privateFileDisplayDtos.Add(new PrivateFileDisplayDto()
+           {
+               Title = pf.Title,
+               ContentType = pf.ContentType,
+               id =pf.Id,
+           });
+       }
+
+       return privateFileDisplayDtos;
+
     }
 }
