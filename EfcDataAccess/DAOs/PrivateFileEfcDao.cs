@@ -69,7 +69,6 @@ public class PrivateFileEfcDao : IPrivateFileDao
            {
                Title = pf.Title,
                ContentType = pf.ContentType,
-               UploadedBy = context.Users.FindAsync(pf.UploadedBy.Id).Result,
                id =pf.Id,
            });
        }
