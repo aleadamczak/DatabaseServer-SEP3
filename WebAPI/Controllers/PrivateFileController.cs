@@ -54,5 +54,24 @@ public class PrivateFileController : ControllerBase
         
         
     }
+    
+    [HttpGet]
+    [Route("downloadPrivateFile")]
+    public async Task<ActionResult<FileDownloadDto>> GetAsync([FromQuery] int fileId)
+    {
+        try
+        {
+            FileDownloadDto downloadFile = await _privateFileDao.GetAsync(fileId);
+            Console.WriteLine("The send file: " + downloadFile.Title);
+
+            return downloadFile;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 
 }

@@ -76,4 +76,22 @@ public class PrivateFileEfcDao : IPrivateFileDao
        return privateFileDisplayDtos;
 
     }
+    
+    public async Task<FileDownloadDto> GetAsync(int fileId)
+    {
+        try
+        {
+            PrivateFile getFile = await context.PrivateFiles.FindAsync(fileId);
+
+            FileDownloadDto downloadFile = new FileDownloadDto(getFile.Title, getFile.bytes, getFile.ContentType);
+            return downloadFile;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);
+        }
+
+    }
 }
