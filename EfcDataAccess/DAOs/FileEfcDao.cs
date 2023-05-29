@@ -76,4 +76,17 @@ public class FileEfcDao : IFileDao
         }
         return toBeDeleted;
     }
+
+    public async Task<File?> UpdateAsync(int id)
+    {
+        File? file = context.Files.FindAsync(id).Result;
+
+        if (file != null)
+        {
+            file.Category = context.Categories.FindAsync("Uncategorized").Result!;
+            await context.SaveChangesAsync();
+        }
+
+        return file;
+    }
 }
