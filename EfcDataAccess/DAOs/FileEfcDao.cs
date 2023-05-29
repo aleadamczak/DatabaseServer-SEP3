@@ -83,7 +83,19 @@ public class FileEfcDao : IFileDao
 
         if (file != null)
         {
+            Category? category = context.Categories.FindAsync("Uncategorized").Result;
+
+            if (category == null)
+            {
+                context.Categories.AddAsync(new Category()
+                {
+                    Name = "Uncategorized",
+
+                });
+                
+            }
             file.Category = context.Categories.FindAsync("Uncategorized").Result!;
+            context.Files.Update(file);
             await context.SaveChangesAsync();
         }
 
