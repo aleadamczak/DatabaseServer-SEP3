@@ -73,5 +73,23 @@ public class PrivateFileController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<ActionResult<PrivateFile?>> Delete(int id)
+    {
+        try
+        {
+            PrivateFile? toBeDeleted = await _privateFileDao.Delete(id);
+            return Ok(toBeDeleted);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+        
+    }
 
 }

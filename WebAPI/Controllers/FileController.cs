@@ -112,4 +112,21 @@ public class FileController : ControllerBase
         
     }
 
+    [HttpPut]
+    [Route("uncategorize/{id}")]
+
+    public async Task<ActionResult<File?>> Update(int id)
+    {
+        try
+        {
+            File? toBeUpdated = await fileDao.UpdateAsync(id);
+            return Ok(toBeUpdated);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
 }

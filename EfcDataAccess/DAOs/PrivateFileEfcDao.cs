@@ -94,4 +94,16 @@ public class PrivateFileEfcDao : IPrivateFileDao
         }
 
     }
+
+    public async Task<PrivateFile?> Delete(int id)
+    {
+        PrivateFile? file = context.PrivateFiles.FindAsync(id).Result;
+                PrivateFile? toBeDeleted = null;
+                if (file != null)
+                {
+                    toBeDeleted = context.PrivateFiles.Remove(file).Entity;
+                    await context.SaveChangesAsync();
+                }
+                return toBeDeleted;
+    }
 }
