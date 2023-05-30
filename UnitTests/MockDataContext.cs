@@ -15,9 +15,15 @@ public class MockDataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // modelBuilder.Entity<User>().HasKey(user => user.Id);
+        // modelBuilder.Entity<File>().HasKey(publicFile => publicFile.Id);
+        // modelBuilder.Entity<Category>().HasKey(category => category.Id);
+        
         modelBuilder.Entity<User>().HasKey(user => user.Id);
-        modelBuilder.Entity<File>().HasKey(publicFile => publicFile.Id);
-        modelBuilder.Entity<Category>().HasKey(category => category.Id);
+        modelBuilder.Entity<File>()
+            .HasKey(publicFile => publicFile.Id);
+        modelBuilder.Entity<File>()
+            .HasOne(c => c.Category);
     }
 }
 
